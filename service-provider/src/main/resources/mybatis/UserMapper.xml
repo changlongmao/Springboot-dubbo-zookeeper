@@ -1,0 +1,33 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dubbo.mapper.UserMapper">
+    <update id="updateUserById">
+        update user set username = #{username} where id = #{id}
+    </update>
+    <update id="updateUserByName">
+        update user set rear_name = #{rearName} where username = #{username}
+    </update>
+    <update id="optimizeTable">
+        OPTIMIZE TABLE ${tableName}
+    </update>
+
+    <select id="queryUserList" resultType="com.example.dubbo.entity.User">
+        select id from user
+    </select>
+    <select id="getById" resultType="com.example.dubbo.entity.User">
+        select id, username,rear_name, password from user where id = #{id} lock in share mode
+    </select>
+    <select id="getTableName" resultType="java.util.Map">
+        SELECT TABLE_NAME tableName FROM `information_schema`.`TABLES` WHERE table_schema=#{database}
+    </select>
+    <select id="getDatabaseName" resultType="java.util.Map">
+        SELECT distinct table_schema databaseName FROM `information_schema`.`TABLES`
+    </select>
+
+    <insert id="batchInsert">
+        insert into user (id, username, password, rear_name)
+        values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.id}, #{user.username}, #{user.password}, #{user.rearName})
+        </foreach>
+    </insert>
+</mapper>
