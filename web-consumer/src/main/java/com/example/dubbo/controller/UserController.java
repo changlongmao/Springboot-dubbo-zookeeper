@@ -233,11 +233,7 @@ public class UserController {
     @PostMapping(value = "/testAspectAdvice")
     public RestResponse testAspectAdvice(@AuthUser AuthUserInfo userInfo, @RequestBody Map<String, Object> params) throws Exception {
 
-        int i = 1 / 0;
-        Thread.sleep(5000);
-        String token = jwtTokenUtil.generateToken("1154218600098865154", 1);
-
-        return RestResponse.success().put("token", token);
+        return RestResponse.success().put("token", "测试成功");
     }
 
     @RequestMapping(value = "/testJedis", method = RequestMethod.GET)
