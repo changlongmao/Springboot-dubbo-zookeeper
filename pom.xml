@@ -5,8 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>common-api</module>
-        <module>service-provider</module>
-        <module>web-consumer</module>
+        <module>user-service-provider</module>
+        <module>user-web-consumer</module>
+        <module>systemLog-service-provider</module>
+        <module>systemLog-web-consumer</module>
     </modules>
 
     <parent>
