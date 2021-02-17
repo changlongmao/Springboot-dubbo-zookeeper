@@ -31,7 +31,7 @@ dubbo:
     name: systemLog-server-consumer
     # zookeeper地址，用于从中获取注册的服务
   registry:
-    address: zookeeper://1.15.104.25:2181
+    address: zookeeper://127.0.0.1:2181
   protocol:
     # dubbo协议，固定写法
     name: dubbo
