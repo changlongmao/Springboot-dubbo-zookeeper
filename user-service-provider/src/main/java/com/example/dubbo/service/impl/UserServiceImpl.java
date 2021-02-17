@@ -2,6 +2,7 @@ package com.example.dubbo.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.entity.User;
@@ -24,14 +25,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     public static final ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 
-    @Reference
-    private SystemLogService systemLogService;
 
     @Override
     public List<User> selectList() {
-        List<SystemLog> systemLogs = systemLogService.selectList();
-        log.info(systemLogs.toString());
-        return baseMapper.queryUserList();
+        return baseMapper.selectList(new QueryWrapper<>());
     }
 
     @Override
