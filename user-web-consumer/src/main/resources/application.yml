@@ -47,7 +47,7 @@ server:
   port: 9000
   connection-timeout: 1000ms
   servlet:
-    context-path: /user
+    context-path: /
 
 mybatis-plus:
   typeAliasesPackage: com.example.dubbo.entity
