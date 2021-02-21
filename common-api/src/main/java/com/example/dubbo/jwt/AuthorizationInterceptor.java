@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.dubbo.common.UserTypeEnum;
 import com.example.dubbo.common.RestResponse;
 import com.example.dubbo.exception.BusinessException;
+import com.example.dubbo.util.JwtTokenUtil;
 import com.example.dubbo.util.StringUtils;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;

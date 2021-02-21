@@ -21,7 +21,7 @@ pom.xml
 */
 public class SendSms {
     public static void main(String[] args) {
-        DefaultProfile profile = DefaultProfile.getProfile("default", "LTAIPgFZkBDg5gZu", "fvfhqbiWpj50V9C0RwO8dFiy7a0zG3");
+        DefaultProfile profile = DefaultProfile.getProfile("default", "", "");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

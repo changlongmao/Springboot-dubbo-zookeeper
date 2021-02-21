@@ -1,19 +1,14 @@
 package com.example.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dubbo.common.RestResponse;
 import com.example.dubbo.common.SysLog;
 import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.entity.User;
-import com.example.dubbo.jwt.AuthUser;
-import com.example.dubbo.jwt.AuthUserInfo;
-import com.example.dubbo.jwt.Authorization;
-import com.example.dubbo.jwt.JwtTokenUtil;
+import com.example.dubbo.util.JwtTokenUtil;
 import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
 import com.example.dubbo.util.JedisUtil;
-import com.example.dubbo.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -21,14 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

@@ -1,4 +1,4 @@
-package com.example.dubbo.jwt;
+package com.example.dubbo.util;
 
 import com.example.dubbo.config.JwtProperties;
 import io.jsonwebtoken.*;
