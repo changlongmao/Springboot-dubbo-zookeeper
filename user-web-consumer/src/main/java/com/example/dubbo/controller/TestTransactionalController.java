@@ -1,13 +1,10 @@
 package com.example.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.entity.User;
 import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,22 +29,21 @@ public class TestTransactionalController {
     private SystemLogService systemLogService;
 
     @GetMapping("/tranCon")
-    @Transactional(rollbackFor = Exception.class)
     public void tranCon() throws Exception{
 //        User byId = userService.selectById("00005a4e478a4a14b3c1d9856844c1f2");
 //        log.info(byId.toString());
 
-        User user = new User("00005a4e478a4a14b3c1d9856844c1f2");
+        User user1 = new User();
+        user1.setUsername("123");
+        user1.setRearName("456");
+        userService.updateUserByName(user1);
+        User user = new User("0000b5b871914487bad4524c8e245d87");
         user.setUsername("123");
         userService.updateUserById(user);
 //        Thread.sleep(10000);
 //        log.info("线程1释放");
 
-        SystemLog systemLog = new SystemLog();
-        systemLog.setId("1359457619690663937");
-        systemLog.setUserName("123");
-        systemLogService.updateById(systemLog);
-        int i = 1/0;
+//        int i = 1/0;
 
 //        try {
 //            int i = 1/0;
@@ -57,7 +53,6 @@ public class TestTransactionalController {
     }
 
     @GetMapping("/testMvcc1")
-    @Transactional(rollbackFor = Exception.class)
     public void testMvcc1() throws Exception{
 //        User user = new User("00005a4e478a4a14b3c1d9856844c1f2");
 //        user.setUsername("456");
@@ -76,7 +71,6 @@ public class TestTransactionalController {
     }
 
     @GetMapping("/testMvcc2")
-//    @Transactional(rollbackFor = Exception.class)
     public void testMvcc2() throws Exception{
         User user = new User("00005a4e478a4a14b3c1d9856844c1f2");
         user.setUsername("456");

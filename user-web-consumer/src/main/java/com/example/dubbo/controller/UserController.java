@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dubbo.common.RestResponse;
 import com.example.dubbo.common.SysLog;
+import com.example.dubbo.datasources.DataSourceNames;
+import com.example.dubbo.datasources.annotation.DataSource;
 import com.example.dubbo.entity.User;
 import com.example.dubbo.jwt.AuthUser;
 import com.example.dubbo.jwt.AuthUserInfo;
@@ -62,8 +64,8 @@ public class UserController {
 
     @GetMapping("/selectList")
     public RestResponse selectList() {
-        userService.selectList();
-        return RestResponse.success();
+        List<User> users = userService.selectList();
+        return RestResponse.success().put("users", users);
     }
 
     @PostMapping(value = "/save")
@@ -197,6 +199,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/count", method = RequestMethod.GET)
+    @DataSource(DataSourceNames.SECOND)
     public RestResponse count(String id) {
         long startTime = System.currentTimeMillis();
 

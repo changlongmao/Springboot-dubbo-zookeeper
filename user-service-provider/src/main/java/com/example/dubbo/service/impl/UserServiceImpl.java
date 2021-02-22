@@ -1,22 +1,21 @@
 package com.example.dubbo.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dubbo.entity.SystemLog;
+import com.example.dubbo.datasources.DataSourceNames;
+import com.example.dubbo.datasources.annotation.DataSource;
 import com.example.dubbo.entity.User;
 import com.example.dubbo.mapper.UserMapper;
-import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service(interfaceClass = UserService.class)
@@ -28,7 +27,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> selectList() {
-        return baseMapper.selectList(new QueryWrapper<>());
+        return baseMapper.selectList(new QueryWrapper<>()).stream().limit(10000).collect(Collectors.toList());
     }
 
     @Override
@@ -38,16 +37,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @DataSource(DataSourceNames.SECOND)
     public void updateUserById(User user) {
         baseMapper.updateUserById(user);
 //        int i = 1/0;
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @DataSource(DataSourceNames.FIRST)
     public void updateUserByName(User user) {
-//        updateUserById(user);
         baseMapper.updateUserByName(user);
     }
 

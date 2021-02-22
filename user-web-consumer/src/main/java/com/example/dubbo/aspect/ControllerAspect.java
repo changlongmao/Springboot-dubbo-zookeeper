@@ -14,9 +14,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @ClassName: TestAspect
@@ -73,8 +70,8 @@ public class ControllerAspect {
     @AfterReturning(value = "pointCut()",returning = "result")
     public void doAfterReturn(JoinPoint joinPoint,Object result) {
         String methedName = joinPoint.getSignature().getName();
-        log.info("The methed {} ends with {}", methedName, result.toString());
-        log.info("后置返回通知" + result.toString());
+        log.info("The methed {} ends with {}", methedName, result);
+        log.info("后置返回通知" + result);
     }
 
     @After("pointCut()")
