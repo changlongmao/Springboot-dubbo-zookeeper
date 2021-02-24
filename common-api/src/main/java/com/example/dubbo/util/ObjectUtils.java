@@ -11,7 +11,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 
-
+/**
+ * @Author Chang
+ * @Description 序列化与反序列化工具类
+ * @Date 2021/2/24 11:20
+ **/
 public class ObjectUtils extends org.apache.commons.lang.ObjectUtils {
 
     private static Log logger = LogFactory.getLog(ObjectUtils.class);

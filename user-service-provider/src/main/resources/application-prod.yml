@@ -31,3 +31,27 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  rabbitmq:
+    host: 1.15.104.25
+    port: 5672
+    username: guest
+    password: guest
+
+dubbo:
+  application:
+    # 服务名称，保持唯一
+    name: user-service
+    # zookeeper地址，用于向其注册服务
+  registry:
+    address: zookeeper://1.15.104.25:2181
+  #暴露服务方式
+  protocol:
+    # dubbo协议，固定写法
+    name: dubbo
+    # 暴露服务端口 （默认是20880，不同的服务提供者端口不能重复）
+    port: 20880
+  scan:
+    base-packages: com.example.dubbo.service.impl
+  provider:
+    version: 1.0
+    timeout: 60000
