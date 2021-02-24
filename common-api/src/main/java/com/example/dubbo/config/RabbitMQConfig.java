@@ -55,11 +55,13 @@ public class RabbitMQConfig {
      */
     @Bean
     public DirectExchange exchangeA() {
+        // durable交换机持久化
         return new DirectExchange(EXCHANGE_A, true, false);
     }
 
     @Bean
     public DirectExchange exchangeB() {
+        // durable交换机持久化
         return new DirectExchange(EXCHANGE_B, true, false);
     }
 
@@ -88,7 +90,6 @@ public class RabbitMQConfig {
     @Bean
     public Queue queueA() {
         return new Queue(QUEUE_A, true); //队列持久
-
     }
 
     /**
@@ -111,7 +112,6 @@ public class RabbitMQConfig {
     @Bean
     public Queue queueB() {
         return new Queue(QUEUE_B, true); //队列持久
-
     }
 
     /**

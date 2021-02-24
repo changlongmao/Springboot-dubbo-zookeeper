@@ -31,3 +31,22 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  rabbitmq:
+    host: 1.15.104.25
+    port: 5672
+    username: guest
+    password: guest
+
+dubbo:
+  application:
+    # 服务名称，保持唯一
+    name: systemLog-web
+    # zookeeper地址，用于从中获取注册的服务
+  registry:
+    address: zookeeper://1.15.104.25:2181
+  protocol:
+    # dubbo协议，固定写法
+    name: dubbo
+  consumer:
+    version: 1.0
+    timeout: 60000

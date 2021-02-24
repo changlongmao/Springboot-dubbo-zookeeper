@@ -42,24 +42,6 @@ spring:
   mvc:
     throw-exception-if-no-handler-found: true
     static-path-pattern: /static/**
-dubbo:
-  application:
-    # 服务名称，保持唯一
-    name: systemLog-service
-    # zookeeper地址，用于向其注册服务
-  registry:
-    address: zookeeper://127.0.0.1:2181
-  #暴露服务方式
-  protocol:
-    # dubbo协议，固定写法
-    name: dubbo
-    # 暴露服务端口 （默认是20880，不同的服务提供者端口不能重复）
-    port: 20881
-  scan:
-    base-packages: com.example.dubbo.service.impl
-  provider:
-    version: 1.0
-    timeout: 60000
 
 mybatis-plus:
   #实体扫描，多个package用逗号或者分号分隔
