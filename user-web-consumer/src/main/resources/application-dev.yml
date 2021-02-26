@@ -52,3 +52,8 @@ dubbo:
   consumer:
     version: 1.0
     timeout: 60000
+
+seata:
+  tx-service-group: my_test_tx_group
+  service:
+    grouplist: 127.0.0.1:8091

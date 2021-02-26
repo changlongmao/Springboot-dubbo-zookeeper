@@ -93,7 +93,7 @@ public class RabbitMQConfig {
     }
 
     /**
-     * 将消息队列A与交换机绑定
+     * 将消息队列A与交换机A绑定
      * 针对消费者配置
      *
      * @return
@@ -115,7 +115,7 @@ public class RabbitMQConfig {
     }
 
     /**
-     * 将消息队列B与交换机绑定
+     * 将消息队列B与交换机B绑定
      * 针对消费者配置
      *
      * @return

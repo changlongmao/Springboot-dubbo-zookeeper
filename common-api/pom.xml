@@ -182,6 +182,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- dubbo -->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
@@ -213,9 +214,17 @@
             <artifactId>redisson</artifactId>
         </dependency>
 
+        <!-- rabbitmq -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- seata -->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
     </dependencies>

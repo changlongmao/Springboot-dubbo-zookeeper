@@ -11,6 +11,8 @@ server:
     context-path: /
 
 spring:
+  application:
+    name: user-service
   # 环境 dev|prod
   profiles:
     active: dev

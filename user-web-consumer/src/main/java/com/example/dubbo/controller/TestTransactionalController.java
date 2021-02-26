@@ -1,10 +1,12 @@
 package com.example.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.entity.User;
 import com.example.dubbo.rabbitmq.MsgProducer;
 import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,29 +37,33 @@ public class TestTransactionalController {
     private MsgProducer msgProducer;
 
     @GetMapping("/tranCon")
-    public void tranCon() throws Exception{
+    @GlobalTransactional
+    public void tranCon() throws Exception {
 //        User byId = userService.selectById("00005a4e478a4a14b3c1d9856844c1f2");
 //        log.info(byId.toString());
+        long start = System.currentTimeMillis();
 
-        log.info("TestTransactionalController: {}", this);
-        log.info("userService: {}", userService);
-        log.info("systemLogService: {}", systemLogService);
-//        User user1 = new User();
-//        user1.setUsername("123");
-//        user1.setRearName("456");
-//        userService.updateUserByName(user1);
-//        User user = new User("0000b5b871914487bad4524c8e245d87");
-//        user.setUsername("123");
-//        userService.updateUserById(user);
+        User user1 = new User();
+        user1.setUsername("123");
+        user1.setRearName("456");
+        userService.updateUserByName(user1);
+        User user = new User("0000b5b871914487bad4524c8e245d87");
+        user.setUsername("123");
+        userService.updateUserById(user);
+        SystemLog systemLog = new SystemLog();
+        systemLog.setUserId("测试分布式事务3");
+        systemLogService.save(systemLog);
 //        Thread.sleep(10000);
 //        log.info("线程1释放");
+        long end = System.currentTimeMillis();
 
-//        int i = 1/0;
+        System.out.println("方法执行时间为：" + (end - start) + "ms");
+        int i = 1 / 0;
 
     }
 
     @GetMapping("/testMvcc1")
-    public void testMvcc1() throws Exception{
+    public void testMvcc1() throws Exception {
 //        User user = new User("00005a4e478a4a14b3c1d9856844c1f2");
 //        user.setUsername("456");
 //        userService.updateUserById(user);
@@ -75,7 +81,7 @@ public class TestTransactionalController {
     }
 
     @GetMapping("/msgProducer")
-    public void msgProducer() throws Exception{
+    public void msgProducer() throws Exception {
         User user1 = new User("给队列A发送消息1");
         msgProducer.sendMsgObject(user1);
         User user2 = new User("给队列A发送消息2");
@@ -97,7 +103,7 @@ public class TestTransactionalController {
         }
         for (int i = 0; i < integerList.size(); i++) {
             Integer integer = integerList.get(i);
-            if (integer > 100 && integer< 1000) {
+            if (integer > 100 && integer < 1000) {
                 integerList.remove(i);
                 i--;
             }
