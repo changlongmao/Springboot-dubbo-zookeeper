@@ -3,20 +3,13 @@ package com.example.dubbo.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.entity.User;
-import com.example.dubbo.rabbitmq.MsgProducer;
 import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName: TestTransactionalController
@@ -33,9 +26,13 @@ public class TestTransactionalController {
     private UserService userService;
     @Reference
     private SystemLogService systemLogService;
-    @Autowired
-    private MsgProducer msgProducer;
 
+    /**
+     * @Author Chang
+     * @Description 测试Seata分布式事务，支持多个微服务和切换多个数据源
+     * @Date 2021/2/26 11:40
+     * @Return void
+     **/
     @GetMapping("/tranCon")
     @GlobalTransactional
     public void tranCon() throws Exception {
@@ -80,44 +77,4 @@ public class TestTransactionalController {
 //        log.info(byId1.toString());
     }
 
-    @GetMapping("/msgProducer")
-    public void msgProducer() throws Exception {
-        User user1 = new User("给队列A发送消息1");
-        msgProducer.sendMsgObject(user1);
-        User user2 = new User("给队列A发送消息2");
-        List<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
-        msgProducer.sendMsgObject(users);
-        Map<String, Object> hashMap = new HashMap<>();
-        hashMap.put("A", "消息1");
-        hashMap.put("B", "消息2");
-        msgProducer.sendMsgObject(hashMap);
-        msgProducer.sendMsgString("给队列B发送消息");
-    }
-
-    public static void main(String[] args) {
-        List<Integer> integerList = new ArrayList<>();
-        for (int i = 0; i < 1000000; i++) {
-            integerList.add(i);
-        }
-        for (int i = 0; i < integerList.size(); i++) {
-            Integer integer = integerList.get(i);
-            if (integer > 100 && integer < 1000) {
-                integerList.remove(i);
-                i--;
-            }
-        }
-//        for (Integer i : integerList) {
-//            if (i > 100 && i< 1000) {
-//                integerList.remove(i);
-//            }
-//        }
-//        integerList.forEach(i -> {
-//            if (i > 100 && i< 1000) {
-//                integerList.remove(i);
-//            }
-//        });
-        System.out.println(integerList.size());
-    }
 }
