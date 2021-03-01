@@ -34,8 +34,8 @@ spring:
   rabbitmq:
     host: 1.15.104.25
     port: 5672
-    username: guest
-    password: guest
+    username: root
+    password: chang123
 
 dubbo:
   application:
@@ -55,3 +55,8 @@ dubbo:
   provider:
     version: 1.0
     timeout: 60000
+
+seata:
+  tx-service-group: my_test_tx_group
+  service:
+    grouplist: 1.15.104.25:8091
