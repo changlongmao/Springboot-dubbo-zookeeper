@@ -1,6 +1,6 @@
 范例：
 java -Xms4g -Xmx4g -Xss256k -XX:NewSize=1g -XX:MaxNewSize=2g -XX:MetaspaceSize=256m -XX:NewRatio=2 -XX:SurvivorRatio=8
--XX:+DisableExplicitGC -XX:MaxTenuringThreshold=15 -XX:+UseParNewGC
+-XX:+DisableExplicitGC -XX:MaxTenuringThreshold=15 -XX:+UseParNewGC -XX:+UseBiasedLocking
 -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:ConcGCThreads=4
 -XX:ParallelGCThreads=8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=logs -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:logs/Gc.log -jar .\demo.jar
 
@@ -19,6 +19,7 @@ java -jar .\demo.jar启动jar包
 -XX:+UseParNewGC	设置年轻代为并行收集
 -XX:ParallelGCThreads=8 	并行收集器的线程数为8
 -XX:+UseConcMarkSweepGC	    老年代使用CMS内存收集
+-XX:+UseBiasedLocking    启用一个优化了的线程锁，对于高并发访问很重要 ，太多的请求忙不过来它自动优化，对于各自长短不一的请求，出现的阻塞、排队现象，他自己优化。
 -XX:+CMSParallelRemarkEnabled	降低标记停顿
 -XX:CMSInitiatingOccupancyFraction=70	使用cms作为垃圾回收，使用70％后开始CMS收集
 -XX:+PrintGCDetails	 输出形式:[GC [DefNew: 8614K->781K(9088K), 0.0123035 secs] 118250K->113543K(130112K), 0.0124633 secs]
