@@ -51,10 +51,17 @@ public class StringUtils {
         }
     }
 
+    public static boolean isNotEmpty(Object obj) {
+        return !isNullOrEmpty(obj);
+    }
 
     public static boolean isNullOrEmpty(Object obj) {
         if (obj == null) {
             return true;
+        }
+
+        if (obj instanceof String) {
+            return ((String) obj).trim().length() == 0 || ((String) obj).equalsIgnoreCase("null");
         }
 
         if (obj instanceof CharSequence) {

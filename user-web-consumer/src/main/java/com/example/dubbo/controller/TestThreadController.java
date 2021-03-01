@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 public class TestThreadController {
 
     public static final ThreadLocal<Object> threadLocal = new ThreadLocal<>();
+
     public static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10,
             30, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
 
@@ -61,22 +62,6 @@ public class TestThreadController {
         log.info("threadLocal" + threadLocal.get());
         return RestResponse.success().put("threadLocal", threadLocal.get());
     }
-
-    @GetMapping("/testLogLevel")
-    public RestResponse testLogLevel() throws Exception {
-
-        System.out.println("开始");
-
-        new Thread(() -> {
-            while (true) {
-                System.out.println("i");
-            }
-        });
-        System.out.println("结束");
-
-        return RestResponse.success();
-    }
-
 
     @GetMapping(value = "/testList")
     public RestResponse testList() throws Exception {

@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * @ClassName AESUtil
  * @Description: AES加解密工具类
- * @Author zhujb
+ * @Author chang
  * @Date 2020/12/18
  * @Version V1.0
  **/

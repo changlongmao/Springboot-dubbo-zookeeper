@@ -11,6 +11,7 @@ import com.example.dubbo.jwt.AuthUserInfo;
 import com.example.dubbo.jwt.Authorization;
 import com.example.dubbo.service.SystemLogService;
 import com.example.dubbo.service.UserService;
+import com.example.dubbo.util.HttpContextUtils;
 import com.example.dubbo.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,8 @@ public class UserController {
 
     @GetMapping("/selectList")
     public RestResponse selectList() {
+        log.info("Domain: {}",HttpContextUtils.getDomain());
+        log.info("Origin: {}",HttpContextUtils.getOrigin());
         List<User> users = userService.selectList();
         return RestResponse.success().put("users", users);
     }

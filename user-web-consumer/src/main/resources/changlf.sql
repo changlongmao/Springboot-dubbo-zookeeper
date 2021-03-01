@@ -272,3 +272,5 @@ CREATE TABLE `undo_log` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+java -Xms4g -Xmx4g -Xss256k -XX:NewSize=1g -XX:MaxNewSize=2g -XX:MetaspaceSize=256m -XX:NewRatio=2 -XX:SurvivorRatio=8 -XX:+DisableExplicitGC -XX:MaxTenuringThreshold=25 -XX:+UseParallelOldGC -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:CMSFullGCsBeforeCompaction=25 -XX:+CMSParallelRemarkEnabled -XX:ConcGCThreads=4 -XX:ParallelGCThreads=8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=logs -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:logs/Gc.log -jar .\demo.jar
