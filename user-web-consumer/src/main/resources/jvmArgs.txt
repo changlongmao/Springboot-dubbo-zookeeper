@@ -1,3 +1,15 @@
+1、 JVM参数简介
+
+-XX 参数被称为不稳定参数，之所以这么叫是因为此类参数的设置很容易引起JVM 性能上的差异，使JVM 存在极大的不稳定性。如果此类参数设置合理将大大提高JVM 的性能及稳定性。
+不稳定参数语法规则：
+1.布尔类型参数值
+        -XX:+<option> '+'表示启用该选项
+        -XX:-<option> '-'表示关闭该选项
+2.数字类型参数值：
+       -XX:<option>=<number> 给选项设置一个数字类型值，可跟随单位，例如：'m'或'M'表示兆字节;'k'或'K'千字节;'g'或'G'千兆字节。32K与32768是相同大小的。
+3.字符串类型参数值：
+        -XX:<option>=<string> 给选项设置一个字符串类型值，通常用于指定一个文件、路径或一系列命令列表。
+       例如：-XX:HeapDumpPath=./dump.core
 范例：
 java -Xms4g -Xmx4g -Xss256k -XX:NewSize=1g -XX:MaxNewSize=2g -XX:MetaspaceSize=256m -XX:NewRatio=2 -XX:SurvivorRatio=8
 -XX:+DisableExplicitGC -XX:MaxTenuringThreshold=15 -XX:+UseParNewGC -XX:+UseBiasedLocking
