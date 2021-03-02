@@ -13,7 +13,7 @@
 范例：
 java -Xms4g -Xmx4g -Xss256k -XX:NewSize=1g -XX:MaxNewSize=2g -XX:MetaspaceSize=256m -XX:NewRatio=2 -XX:SurvivorRatio=8
 -XX:+DisableExplicitGC -XX:MaxTenuringThreshold=15 -XX:+UseParNewGC -XX:+UseBiasedLocking
--XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:ConcGCThreads=4
+-XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:ConcGCThreads=8
 -XX:ParallelGCThreads=8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=logs -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:logs/Gc.log -jar .\demo.jar
 
 java -jar .\demo.jar启动jar包
@@ -29,7 +29,8 @@ java -jar .\demo.jar启动jar包
 -XX:+DisableExplicitGC	关闭System.gc()
 -XX:MaxTenuringThreshold=15	 垃圾最大年龄，如果将此值设置为一个较大值,则年轻代对象会在Survivor区进行多次复制,这样可以增加对象再年轻代的存活 时间,增加在年轻代即被回收的概率
 -XX:+UseParNewGC	设置年轻代为并行收集
--XX:ParallelGCThreads=8 	并行收集器的线程数为8
+-XX:ParallelGCThreads=8 	并行收集器的线程数为8，此值最好配置与处理器数目相等
+-XX:ConcGCThreads=8     CMS垃圾回收器并行线程线，推荐值为CPU核心数。
 -XX:+UseConcMarkSweepGC	    老年代使用CMS内存收集
 -XX:+UseBiasedLocking    启用一个优化了的线程锁，对于高并发访问很重要 ，太多的请求忙不过来它自动优化，对于各自长短不一的请求，出现的阻塞、排队现象，他自己优化。
 -XX:+CMSParallelRemarkEnabled	降低标记停顿
@@ -39,7 +40,6 @@ java -jar .\demo.jar启动jar包
 -Xloggc:logs/Gc.log	把相关日志信息记录到logs/GcLog.log文件以便分析
 -XX:+HeapDumpOnOutOfMemoryError 出现堆内存溢出时，自动导出堆内存 dump 快照
 -XX:HeapDumpPath=logs 设置导出的堆内存快照的存放地址为logs
--XX:ConcGCThreads=4     CMS垃圾回收器并行线程线，推荐值为CPU核心数。
 
 jps命令，查看正在运行的jvm进程号
 19008 Jps
