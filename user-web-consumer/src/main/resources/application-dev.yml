@@ -52,6 +52,8 @@ dubbo:
   consumer:
     version: 1.0
     timeout: 60000
+    # 负载均衡配置，默认random随机，roundrobin轮询，leastActive最少活跃调用数，consistentHash一致性Hash，相同参数的请求总是发到同一提供者
+    loadbalance: roundrobin
 
 seata:
   tx-service-group: my_test_tx_group
