@@ -46,3 +46,5 @@
 - 分布式事务：seata
 
 - 消息队列：rabbitmq
+
+- 负载均衡：nginx
