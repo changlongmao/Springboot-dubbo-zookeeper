@@ -10,10 +10,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +45,7 @@ public class TestRedissonController {
      **/
     @GetMapping(value = "/save")
     @Transactional(rollbackFor = Exception.class)
-    public RestResponse save(@RequestBody Map<String, Object> params) {
+    public RestResponse save(@RequestParam Map<String, Object> params) {
         log.info("code:{}", params.get("code"));
         RLock lock = redisson.getLock("save" + params.get("code"));
 //        if (lock.isLocked()) {

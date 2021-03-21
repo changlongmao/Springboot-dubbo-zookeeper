@@ -54,7 +54,8 @@ public class SystemLogController {
     public static final List<User> userList = Collections.synchronizedList(new ArrayList<>());
 
     @GetMapping("/selectList")
-    public RestResponse selectList() {
+    public RestResponse selectList(@RequestParam Map<String, Object> params) {
+        log.info(params.toString());
         List<SystemLog> systemLogs = systemLogService.selectList();
         return RestResponse.success().put("systemLogs", systemLogs);
     }

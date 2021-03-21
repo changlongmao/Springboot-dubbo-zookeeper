@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.dubbo.common.SysLog;
 import com.example.dubbo.entity.SystemLog;
 import com.example.dubbo.jwt.AuthUserInfo;
+import com.example.dubbo.util.IpUtils;
 import com.example.dubbo.util.JwtTokenUtil;
 import com.example.dubbo.service.SystemLogService;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +70,7 @@ public class SysLogAspect {
             }
 
             systemLog.setModule(requestURI.substring(1).split("/")[0]);
-            systemLog.setIp(InetAddress.getLocalHost().getHostAddress());
+            systemLog.setIp(IpUtils.getIpAddr(request));
             if (requestURI.contains("login") || requestURI.contains("updatePassword") || requestURI.contains("addFyUser")) {
                 systemLog.setArgs("参数包含密码接口不存储参数");
             }else {
